@@ -6,10 +6,13 @@
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "build-production": "cross-env NODE_ENV=production webpack --config webpack.config.js",
-    "start": "webpack-dev-server --open"
+    "start": "webpack-dev-server --open",
+    "deploy": "npm run gh-pages",
+    "gh-pages": "gh-pages -d dist -b gh-pages"
   },
   "keywords": [],
   "author": "",
+  "homepage": "https://zhangzihaoDT.github.io/intro",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.7.7",
@@ -31,7 +34,10 @@
     "webpack-dev-server": "^3.10.1"
   },
   "dependencies": {
+    "browser-js": "^1.10.1",
     "d3": "^5.14.2",
-    "postcss-import": "^12.0.1"
+    "gh-pages": "^2.2.0",
+    "postcss-import": "^12.0.1",
+    "simple-breakpoints": "^1.1.3"
   }
 }
