@@ -100,34 +100,74 @@ $size-header-pad: 4em;
     margin-bottom: 10px !important;
   }
 }
-.work-item:nth-child(1) {
-  .image img {
-    content: url("../images/fulls/01.jpg");
+#two {
+  .work-item:nth-child(1) {
+    .image img {
+      content: url("../images/fulls/01.gif");
+    }
+  }
+  .work-item:nth-child(2) {
+    .image img {
+      content: url("../images/fulls/02.gif");
+    }
+  }
+  .work-item:nth-child(3) {
+    .image img {
+      content: url("../images/fulls/03.gif");
+    }
+  }
+  .work-item:nth-child(4) {
+    .image img {
+      content: url("../images/fulls/04.gif");
+    }
+  }
+  .work-item:nth-child(5) {
+    .image img {
+      content: url("../images/fulls/05.gif");
+    }
+  }
+  .work-item:nth-child(6) {
+    .image img {
+      content: url("../images/fulls/11.gif");
+    }
   }
 }
-.work-item:nth-child(2) {
-  .image img {
-    content: url("../images/fulls/02.jpg");
+
+#three {
+  .work-item:nth-child(1) {
+    .image img {
+      content: url("../images/fulls/08.gif");
+    }
+  }
+  .work-item:nth-child(2) {
+    .image img {
+      content: url("../images/fulls/09.gif");
+    }
+  }
+  .work-item:nth-child(3) {
+    .image img {
+      content: url("../images/fulls/10.gif");
+    }
   }
 }
-.work-item:nth-child(3) {
-  .image img {
-    content: url("../images/fulls/03.jpg");
+
+#four {
+  .work-item:nth-child(1) {
+    .image img {
+      content: url("../images/fulls/06.gif");
+    }
+  }
+  .work-item:nth-child(2) {
+    .image img {
+      content: url("../images/fulls/07.gif");
+    }
   }
 }
-.work-item:nth-child(4) {
-  .image img {
-    content: url("../images/fulls/04.jpg");
-  }
-}
-.work-item:nth-child(5) {
-  .image img {
-    content: url("../images/fulls/05.jpg");
-  }
-}
-.work-item:nth-child(6) {
-  .image img {
-    content: url("../images/fulls/06.jpg");
+#openModal {
+  .work-item {
+    .image img {
+      content: url("../images/fulls/WeChat.png");
+    }
   }
 }
 /* Header */

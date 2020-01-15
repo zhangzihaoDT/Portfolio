@@ -395,7 +395,7 @@ pre {
     display: block;
     height: 100%;
     left: 0;
-    opacity: 0.5;
+    opacity: 0.1;
     position: absolute;
     top: 0;
     width: 100%;
@@ -667,5 +667,32 @@ input[type="button"],
     border-color: _palette(border2-bg) !important;
     color: _palette(fg-light) !important;
     cursor: default;
+  }
+}
+
+/*modal*/
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 99999;
+  opacity: 0;
+  transition: opacity 100ms ease-in;
+  pointer-events: none;
+  &:target {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  > div {
+    max-width: 800px;
+    width: 90%;
+    position: relative;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 3px;
+    background: #fff;
   }
 }
