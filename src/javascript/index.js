@@ -3,6 +3,7 @@ import "../sass/main.scss";
 import * as d3 from "d3";
 import SimpleBreakpoints from "simple-breakpoints";
 import browser from "browser-js";
+import * as SmoothScroll from "smooth-scroll";
 
 const $window = d3.select("window"),
   $body = document.querySelector("body"),
@@ -69,3 +70,9 @@ if (settings.parallax) {
     $window.triggerHandler("scroll");
   });
 }
+
+new SmoothScroll('a[href*="#"]', {
+  speed: 500,
+  ignore: 'a[href="#openModal"]',
+  speedAsDuration: true
+});
