@@ -22,24 +22,24 @@ $size-header-pad: 4em;
   (
     xlarge: (
       1281px,
-      1800px
+      1800px,
     ),
     large: (
       981px,
-      1280px
+      1280px,
     ),
     medium: (
       737px,
-      980px
+      980px,
     ),
     small: (
       481px,
-      736px
+      736px,
     ),
     xsmall: (
       null,
-      480px
-    )
+      480px,
+    ),
   )
 );
 /* html-grid */
@@ -56,8 +56,16 @@ $size-header-pad: 4em;
     box-sizing: border-box;
   }
 
+  > .col-4 {
+    width: 33.3%;
+  }
+
   > .col-6 {
     width: 50%;
+  }
+
+  > .col-8 {
+    width: 66.6%;
   }
 
   > .col-12 {
@@ -103,32 +111,32 @@ $size-header-pad: 4em;
 #two {
   .work-item:nth-child(1) {
     .image img {
-      content: url("../images/fulls/01.gif");
+      content: url("../images/fulls/WX20210224-204614@2x.png");
     }
   }
   .work-item:nth-child(2) {
     .image img {
-      content: url("../images/fulls/02.gif");
+      content: url("../images/fulls/03.gif");
     }
   }
   .work-item:nth-child(3) {
     .image img {
-      content: url("../images/fulls/03.gif");
+      content: url("../images/fulls/02.gif");
     }
   }
   .work-item:nth-child(4) {
     .image img {
-      content: url("../images/fulls/04.gif");
+      content: url("../images/fulls/01.gif");
     }
   }
   .work-item:nth-child(5) {
     .image img {
-      content: url("../images/fulls/05.gif");
+      content: url("../images/fulls/04.gif");
     }
   }
   .work-item:nth-child(6) {
     .image img {
-      content: url("../images/fulls/11.gif");
+      content: url("../images/fulls/05.gif");
     }
   }
 }
@@ -136,17 +144,17 @@ $size-header-pad: 4em;
 #three {
   .work-item:nth-child(1) {
     .image img {
-      content: url("../images/fulls/08.gif");
+      content: url("../images/fulls/WX20210224-212630@2x.png");
     }
   }
   .work-item:nth-child(2) {
     .image img {
-      content: url("../images/fulls/09.gif");
+      content: url("../images/fulls/1_gIr1nrPl3Y5CTvCWdWmxxg.png");
     }
   }
-  .work-item:nth-child(4) {
+  .work-item:nth-child(3) {
     .image img {
-      content: url("../images/fulls/10.gif");
+      content: url("../images/fulls/WX20210224-214130@2x.png");
     }
   }
 }
@@ -154,12 +162,12 @@ $size-header-pad: 4em;
 #four {
   .work-item:nth-child(1) {
     .image img {
-      content: url("../images/fulls/06.gif");
+      content: url("../images/fulls/1248c4e9-ccb4-4aaf-81a8-f09e12415d93.png");
     }
   }
   .work-item:nth-child(2) {
     .image img {
-      content: url("../images/fulls/07.gif");
+      content: url("../images/fulls/06.gif");
     }
   }
 }
