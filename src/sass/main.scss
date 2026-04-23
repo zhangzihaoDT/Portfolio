@@ -108,76 +108,6 @@ $size-header-pad: 4em;
     margin-bottom: 10px !important;
   }
 }
-#two {
-  .work-item:nth-child(1) {
-    .image img {
-      content: url("../images/fulls/WX20210224-204614@2x.png");
-    }
-  }
-  .work-item:nth-child(2) {
-    .image img {
-      content: url("../images/fulls/03.gif");
-    }
-  }
-  .work-item:nth-child(3) {
-    .image img {
-      content: url("../images/fulls/02.gif");
-    }
-  }
-  .work-item:nth-child(4) {
-    .image img {
-      content: url("../images/fulls/01.gif");
-    }
-  }
-  .work-item:nth-child(5) {
-    .image img {
-      content: url("../images/fulls/04.gif");
-    }
-  }
-  .work-item:nth-child(6) {
-    .image img {
-      content: url("../images/fulls/05.gif");
-    }
-  }
-}
-
-#three {
-  .work-item:nth-child(1) {
-    .image img {
-      content: url("../images/fulls/WX20210224-212630@2x.png");
-    }
-  }
-  .work-item:nth-child(2) {
-    .image img {
-      content: url("../images/fulls/1_gIr1nrPl3Y5CTvCWdWmxxg.png");
-    }
-  }
-  .work-item:nth-child(3) {
-    .image img {
-      content: url("../images/fulls/WX20210224-214130@2x.png");
-    }
-  }
-}
-
-#four {
-  .work-item:nth-child(1) {
-    .image img {
-      content: url("../images/fulls/1248c4e9-ccb4-4aaf-81a8-f09e12415d93.png");
-    }
-  }
-  .work-item:nth-child(2) {
-    .image img {
-      content: url("../images/fulls/06.gif");
-    }
-  }
-}
-#openModal {
-  .work-item {
-    .image img {
-      content: url("../images/fulls/WeChat.png");
-    }
-  }
-}
 /* Header */
 header {
   p {
@@ -252,10 +182,7 @@ header {
       margin: 0 0 (_size(element-margin) * 0.5) 0;
       width: 6.25em;
       height: 6.25em;
-      content: url("../images/avatar.jpg");
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
+      object-fit: cover;
     }
   }
 }

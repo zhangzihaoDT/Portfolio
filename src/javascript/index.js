@@ -2,8 +2,9 @@ import "../sass/style.scss";
 import "../sass/main.scss";
 import * as d3 from "d3";
 import SimpleBreakpoints from "simple-breakpoints";
-import browser from "browser-js";
 import * as SmoothScroll from "smooth-scroll";
+import contentUrl from "../content.md";
+import { loadAndApplyContent } from "./content";
 
 const $window = d3.select("window"),
   $body = document.querySelector("body"),
@@ -17,6 +18,8 @@ const $window = d3.select("window"),
     // Parallax factor (lower = more intense, higher = less intense).
     parallaxFactor: 20
   };
+
+loadAndApplyContent(contentUrl).catch(() => {});
 
 // Breakpoints.
 const breakpoints = new SimpleBreakpoints({
@@ -47,15 +50,15 @@ if (breakpoints.isSmallDesktop() || breakpoints.isLargeDesktop()) {
 // Parallax background.
 
 // Disable parallax on IE (smooth scrolling is jerky), and on mobile platforms (= better performance).
-if (browser.name == "ie" || browser.mobile) settings.parallax = false;
+const isIE = /MSIE|Trident/.test(window.navigator.userAgent);
+const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(window.navigator.userAgent);
+if (isIE || isMobile) settings.parallax = false;
 
 if (settings.parallax) {
   if (breakpoints.isMobile() || breakpoints.isTablet()) {
-    console.log("mobile");
   }
 
   if (breakpoints.isSmallDesktop() || breakpoints.isLargeDesktop()) {
-    console.log("desktop");
     $header.style.backgroundPosition = "left 0px";
 
     window.onscroll = function() {

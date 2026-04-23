@@ -58,7 +58,20 @@ module.exports = {
           {
             loader: "file-loader",
             options: {
-              outputPath: "images"
+              name: "[path][name].[ext]",
+              context: path.resolve(__dirname, "src"),
+              esModule: false
+            }
+          }
+        ]
+      },
+      {
+        test: /\.md$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "[name].[ext]"
             }
           }
         ]
