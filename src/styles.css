@@ -513,69 +513,34 @@ a.card:hover h4 {
   border-top: 1px solid #E5EAF0;
 }
 
-/* --- Case Cards (Data Section) --- */
-.case-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+/* --- Method List (Data Section) --- */
+.method-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
   margin-top: 40px;
 }
 
-.case-card {
-  background: #FFFFFF;
+.method-item {
+  background: #FAFBFC;
   border: 1px solid #E5EAF0;
-  border-radius: 12px;
-  padding: 28px 32px;
-  transition: box-shadow 0.25s;
-}
-
-.case-card:hover {
-  box-shadow: 0 4px 16px rgba(23, 74, 124, 0.08);
-}
-
-.case-number {
-  font-size: 0.7rem;
-  font-weight: 700;
-  color: #D79A36;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 4px;
-}
-
-.case-card h4 {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #1F2D3D;
-  margin-bottom: 16px;
-}
-
-.case-detail {
+  border-radius: 10px;
+  padding: 20px 24px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
-.case-q {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-}
-
-.case-label {
-  font-size: 0.7rem;
+.method-name {
+  font-size: 0.9rem;
   font-weight: 700;
   color: #174A7C;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  min-width: 40px;
-  padding-top: 3px;
-  flex-shrink: 0;
 }
 
-.case-q p {
-  font-size: 0.88rem;
-  color: #4A5A6E;
-  line-height: 1.6;
+.method-desc {
+  font-size: 0.85rem;
+  color: #6B7C8F;
+  line-height: 1.5;
 }
 
 /* --- Capability Chain --- */
@@ -1130,8 +1095,8 @@ a.card:hover h4 {
     font-size: 0.8rem;
   }
 
-  .case-card {
-    padding: 20px 24px;
+  .method-list {
+    grid-template-columns: 1fr;
   }
 
   .matrix-col-1 {
@@ -1204,10 +1169,6 @@ a.card:hover h4 {
   .nav-links a {
     font-size: 0.75rem;
     white-space: nowrap;
-  }
-
-  .case-card {
-    padding: 16px 20px;
   }
 
   .project-card {
