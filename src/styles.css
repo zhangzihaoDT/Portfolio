@@ -793,45 +793,6 @@ a.card:hover h4 {
   line-height: 1.6;
 }
 
-/* --- Reader Guide --- */
-#reader-guide {
-  padding: 60px 0;
-}
-
-.reader-block {
-  text-align: center;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.reader-quote {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: #174A7C;
-  margin-bottom: 24px;
-  letter-spacing: 0.02em;
-}
-
-.reader-lines {
-  margin-bottom: 24px;
-}
-
-.reader-line {
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: #1F2D3D;
-  line-height: 1.7;
-  margin-bottom: 4px;
-}
-
-.reader-footnote {
-  font-size: 0.95rem;
-  color: #6B7C8F;
-  line-height: 1.6;
-  padding-top: 16px;
-  border-top: 1px solid #E5EAF0;
-}
-
 /* --- Capability Chain Steps --- */
 #capability-chain-block {
   background: #FAFBFC;
@@ -1221,10 +1182,6 @@ a.card:hover h4 {
 }
 
 @media (max-width: 480px) {
-  .reader-line {
-    font-size: 1.15rem;
-  }
-
   .section {
     padding: 72px 0 56px;
   }

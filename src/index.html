@@ -109,12 +109,6 @@
 
     <main class="page-main">
 
-      <section class="section" id="reader-guide">
-        <div class="container">
-          <div class="reader-grid" id="reader-grid"></div>
-        </div>
-      </section>
-
       <section class="section section-chapter" id="design">
         <div class="container">
           <div class="chapter-header">
@@ -314,7 +308,7 @@
   <script id="page-data" type="application/json">
     {
       "hero": { "subtitle": "汽车行业数据分析与 AI 工具构建者，关注市场洞察、竞品分析、需求预测与智能分析系统。" },
-      "readerGuide": { "quote": "我一直在做同一件事", "lines": ["把混乱的信息整理成结构。", "把结构变成判断。", "把判断沉淀成工具。"], "footnote": "只是不同阶段，我使用的工具不同：最早是设计，后来是数据，现在是 AI。" },
+      
       "design": { "title": "我的出厂设置", "description": "我最早接受的训练，是如何让信息被看见、被理解、被记住。这让我后来做数据看板、分析报告、AI 产品原型时，始终不只是关心\"有没有结论\"，也关心\"别人能不能理解这个结论\"。设计能力成为了我后来做数据产品和 AI 工具的表达底座。", "cards": [ { "id": 1, "title": "早期平面作品", "description": "世界杯的历史 · 毕业设计：综合 / d3.js / R / illustrator", "image": "./images/fulls/01.gif", "link": null, "narrativeRole": "design-foundation" }, { "id": 2, "title": "信息图 / 报告版式", "description": "Scrollytelling 提供了连续性，数据可视化的目标是让用户始终参与其中。《Behind the 30,000 flight data》入围 2019 凯度信息之美大奖。", "image": "./images/fulls/03.gif", "link": "https://zhangzihaodt.github.io/scrolly2.0/", "narrativeRole": "design-foundation" }, { "id": 3, "title": "视觉系统 / 组件化页面", "description": "2019 CES 第一财经展台 · \"答题选项\"交互装置", "image": "./images/fulls/02.gif", "link": "https://mp.weixin.qq.com/s/8SGnhYtY3Pf9sAyUH0tsGg", "narrativeRole": "design-foundation" }, { "id": 4, "title": "视频 / 动画", "description": "动态图形 · 数据叙事 · 影像实验", "image": "./images/fulls/WX20210224-204614@2x.png", "link": "https://mp.weixin.qq.com/s/-YDq5U3tRzHVhbic-hI61g", "narrativeRole": "design-foundation" } ] },
       "data": { "title": "我主动追求的能力", "description": "我曾经相信，数据分析是一种更理性的工作方式。它可以帮助我们理解市场、用户、竞争、销量和产品机会。后来我发现，数据不是答案本身。数据只是现实世界留下的痕迹。分析师真正要做的，是在不完整、不干净、不稳定的信息中，建立足够可靠的判断。", "cases": [ { "id": "Case 01", "title": "新能源 SUV 竞争格局分析", "detail": { "问题": "新能源 SUV 市场快速扩容，如何识别核心竞争格局与品牌定位差异？", "拆解": "按价格带、车身尺寸、动力形式分层，交叉分析销量、增速、份额变化。", "方法": "多维交叉分析 · 竞争气泡图 · 价格带份额矩阵", "产出": "竞争格局报告 + 品牌定位地图，支撑产品线规划讨论", "学到": "市场分析的关键不是数据多，而是分类维度选得对" } }, { "id": "Case 02", "title": "车型需求预测体系", "detail": { "问题": "如何在新车型上市前准确预估月销量，支撑排产与库存决策？", "拆解": "拆分历史数据、竞品对标、价格弹性、线索转化等因子，分层建模。", "方法": "时间序列 · 类比推算 · 多因子回归 · 专家校准", "产出": "月度预测报告 + 实时指标看板，预测精度提升 20%+", "学到": "预测不是算出一个数，而是建立一套持续校准的判断机制" } }, { "id": "Case 03", "title": "上市 48 小时竞品简报", "detail": { "问题": "竞品新车发布后，管理层需要 48 小时内获得关键信息摘要。", "拆解": "设计信息采集模板，覆盖产品、定价、配置、竞争评价，串联多源数据。", "方法": "信息模板设计 · 多源聚合 · 结构化输出流程", "产出": "标准化简报模板，可在 48 小时内完成首轮竞争评估", "学到": "快速响应比深度分析在某些场景下更关键" } }, { "id": "Case 04", "title": "市场数据看板与自动化报告", "detail": { "问题": "市场数据分散在多源、多表、多格式中，团队获取洞察效率低下。", "拆解": "设计统一数据模型，建立 ETL 流程，将核心指标可视化并定期推送。", "方法": "SQL ETL · 数据建模 · Tableau / HTML 报告自动化", "产出": "自动化数据看板 + 每周报告推送，减少 70% 人工取数时间", "学到": "分析的价值不止在结论，更在让结论可被持续获取" } } ] },
       "auto": { "title": "现实世界的训练场", "description": "汽车行业让我看到，产品不是孤立存在的。一台车背后有用户、价格、渠道、品牌、竞品、节奏、政策和供应链。它不是一个干净的数据集，而是一个持续变化的现实系统。", "chain": ["市场", "用户", "产品", "竞品", "销售", "预测", "决策"], "matrix": [ { "capability": "市场洞察", "solves": "判断机会在哪里" }, { "capability": "产品分析", "solves": "判断产品怎么打" }, { "capability": "竞品监控", "solves": "判断对手发生了什么" }, { "capability": "销售漏斗", "solves": "判断卖得怎么样" }, { "capability": "需求预测", "solves": "判断未来卖多少" }, { "capability": "AI 数据结构", "solves": "让这套能力系统化" } ], "note": "汽车行业不是我的行业标签，而是我理解复杂商业系统的训练场。" },
