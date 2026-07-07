@@ -131,16 +131,14 @@
   // --- Render reader guide ---
   function renderReaderGuide(guide) {
     var container = document.getElementById('reader-grid');
-    if (!container || !guide || !guide.cards) return;
-    var titleHtml = guide.title ? '<h2 class="section-title">' + guide.title + '</h2>' : '';
-    container.innerHTML = titleHtml +
-      '<div class="reader-cards">' +
-      guide.cards.map(function (c) {
-        return '<div class="reader-card">' +
-          '<h4>' + c.perspective + '</h4>' +
-          '<p>' + c.description + '</p>' +
-          '</div>';
-      }).join('') +
+    if (!container || !guide || !guide.lines) return;
+    container.innerHTML =
+      '<div class="reader-block">' +
+      '<p class="reader-quote">' + guide.quote + '</p>' +
+      '<div class="reader-lines">' +
+      guide.lines.map(function (l) { return '<p class="reader-line">' + l + '</p>'; }).join('') +
+      '</div>' +
+      '<p class="reader-footnote">' + guide.footnote + '</p>' +
       '</div>';
   }
 
