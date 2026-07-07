@@ -56,22 +56,21 @@
     }).join('');
   }
 
-  // --- Render data cases ---
-  function renderDataCases(cases) {
-    var container = document.getElementById('data-cases');
-    if (!container || !cases) return;
-    container.innerHTML = cases.map(function (c) {
-      var detailHtml = '';
-      for (var key in c.detail) {
-        detailHtml += '<div class="case-q"><span class="case-label">' + key + '</span><p>' + c.detail[key] + '</p></div>';
-      }
-      return '<div class="case-card">' +
-        '<div class="case-number">' + c.id + '</div>' +
-        getRoleHTML(c.narrativeRole) +
-        '<h4>' + c.title + '</h4>' +
-        '<div class="case-detail">' + detailHtml + '</div>' +
-        '</div>';
-    }).join('');
+  // --- Render data methods ---
+  function renderDataMethods(methods) {
+    var container = document.getElementById('data-methods');
+    if (!container || !methods) return;
+    container.innerHTML = '<div class="method-list">' +
+      methods.map(function (m) {
+        return '<div class="method-item">' +
+          (m.image ? '<div class="method-visual"><img src="' + m.image + '" alt="' + m.name + '"></div>' : '') +
+          '<div class="method-body">' +
+          '<span class="method-name">' + m.name + '</span>' +
+          '<span class="method-desc">' + m.description + '</span>' +
+          '</div>' +
+          '</div>';
+      }).join('') +
+      '</div>';
   }
 
   // --- Render auto chain ---
@@ -203,7 +202,7 @@
   // --- Execute all renders ---
   renderHeroSubtitle(data.hero && data.hero.subtitle);
   renderDesignCards(data.design && data.design.cards);
-  renderDataCases(data.data && data.data.cases);
+  renderDataMethods(data.data && data.data.methods);
   renderAutoChain(data.auto && data.auto.chain);
   renderAutoMatrix(data.auto && data.auto.matrix);
   renderAiCards(data.ai && data.ai.cards);
