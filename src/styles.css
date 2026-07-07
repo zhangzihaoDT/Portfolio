@@ -516,8 +516,8 @@ a.card:hover h4 {
 /* --- Method List (Data Section) --- */
 .method-list {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
   margin-top: 40px;
 }
 
@@ -1119,7 +1119,7 @@ a.card:hover h4 {
   }
 
   .method-list {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .matrix-col-1 {
@@ -1177,6 +1177,10 @@ a.card:hover h4 {
 
 .card-placeholder .card-visual {
   height: 100px;
+  }
+
+  .method-list {
+    grid-template-columns: 1fr;
   }
 
   .catalog {
