@@ -122,7 +122,29 @@
       '</div></div>';
   }
 
-  // --- Render projects ---
+  // --- Render hero subtitle ---
+  function renderHeroSubtitle(subtitle) {
+    var el = document.getElementById('hero-subtitle');
+    if (el && subtitle) el.textContent = subtitle;
+  }
+
+  // --- Render reader guide ---
+  function renderReaderGuide(guide) {
+    var container = document.getElementById('reader-grid');
+    if (!container || !guide || !guide.cards) return;
+    var titleHtml = guide.title ? '<h2 class="section-title">' + guide.title + '</h2>' : '';
+    container.innerHTML = titleHtml +
+      '<div class="reader-cards">' +
+      guide.cards.map(function (c) {
+        return '<div class="reader-card">' +
+          '<h4>' + c.perspective + '</h4>' +
+          '<p>' + c.description + '</p>' +
+          '</div>';
+      }).join('') +
+      '</div>';
+  }
+
+  // --- Render projects (enhanced with summary + tags) ---
   function renderProjects(projects) {
     var container = document.getElementById('project-list');
     if (!container || !projects) return;
@@ -131,12 +153,18 @@
       for (var key in p.detail) {
         detailHtml += '<div class="project-q"><span class="project-label">' + key + '</span><p>' + p.detail[key] + '</p></div>';
       }
+      var tagsHtml = p.tags && p.tags.length
+        ? '<div class="project-tags">' + p.tags.map(function (t) { return '<span class="project-tag">' + t + '</span>'; }).join('') + '</div>'
+        : '';
+      var summaryHtml = p.summary ? '<p class="project-summary">' + p.summary + '</p>' : '';
       return '<div class="project-card">' +
         '<div class="project-number">' + p.id + '</div>' +
         '<div class="project-body">' +
         getRoleHTML(p.narrativeRole) +
         '<h4>' + p.title + '</h4>' +
+        summaryHtml +
         '<div class="project-detail">' + detailHtml + '</div>' +
+        tagsHtml +
         '</div>' +
         '</div>';
     }).join('');
@@ -154,7 +182,34 @@
     }).join('');
   }
 
+  // --- Render capability chain ---
+  function renderCapabilityChain(chainData) {
+    var container = document.getElementById('chain-steps');
+    if (!container || !chainData || !chainData.steps) return;
+    var titleHtml = chainData.title ? '<h2 class="section-title">' + chainData.title + '</h2>' : '';
+    container.innerHTML = titleHtml +
+      '<div class="chain-steps">' +
+      chainData.steps.map(function (s, i) {
+        var arrow = i < chainData.steps.length - 1 ? '<span class="chain-step-arrow">\u2192</span>' : '';
+        return '<div class="chain-step">' +
+          '<span class="chain-step-label">' + s.step + '</span>' +
+          '<p class="chain-step-desc">' + s.description + '</p>' +
+          '</div>' + arrow;
+      }).join('') +
+      '</div>';
+  }
+
+  // --- Render "not what" ---
+  function renderNotWhat(notWhat) {
+    var container = document.getElementById('not-what-content');
+    if (!container || !notWhat) return;
+    container.innerHTML = '<h2 class="section-title">' + notWhat.title + '</h2>' +
+      '<p class="not-what-body">' + notWhat.body + '</p>';
+  }
+
   // --- Execute all renders ---
+  renderHeroSubtitle(data.hero && data.hero.subtitle);
+  renderReaderGuide(data.readerGuide);
   renderDesignCards(data.design && data.design.cards);
   renderDataCases(data.data && data.data.cases);
   renderAutoChain(data.auto && data.auto.chain);
@@ -162,7 +217,9 @@
   renderAiCards(data.ai && data.ai.cards);
   renderAiCapabilities(data.ai && data.ai.capabilities);
   renderProjects(data.projects);
+  renderCapabilityChain(data.capabilityChain);
   renderCapability(data.capability);
+  renderNotWhat(data.notWhat);
 
   // --- Nav active highlight ---
   var navLinks = document.querySelectorAll('.nav-links a');
