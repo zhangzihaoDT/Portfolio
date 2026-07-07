@@ -1,43 +1,18 @@
 {
-  "name": "d3-webpack-babel-tutorial",
-  "version": "1.0.0",
-  "description": "",
+  "name": "zihao-portfolio",
+  "version": "2.0.0",
+  "description": "From Design to Data to AI Tools · 一个 90 后上班族的能力迁移记录",
   "private": true,
   "scripts": {
-    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack --config webpack.config.js",
-    "build-production": "cross-env NODE_ENV=production NODE_OPTIONS=--openssl-legacy-provider webpack --config webpack.config.js",
-    "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack-dev-server --open",
+    "dev": "python3 -m http.server 8080 -d src",
     "deploy": "npm run gh-pages",
-    "gh-pages": "gh-pages -d dist -b gh-pages"
+    "gh-pages": "gh-pages -d src -b gh-pages"
   },
   "keywords": [],
-  "author": "",
-  "homepage": "https://zhangzihaoDT.github.io/Portfolio",
+  "author": "Zihao Zhang",
+  "homepage": "https://zhangzihaodt.github.io/Portfolio",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.7.7",
-    "@babel/preset-env": "^7.7.7",
-    "autoprefixer": "^9.7.3",
-    "babel-loader": "^8.0.6",
-    "clean-webpack-plugin": "^3.0.0",
-    "cross-env": "^6.0.3",
-    "css-loader": "^3.4.0",
-    "cssnano": "^4.1.10",
-    "file-loader": "^5.0.2",
-    "html-webpack-plugin": "^3.2.0",
-    "mini-css-extract-plugin": "^0.9.0",
-    "postcss-loader": "^3.0.0",
-    "sass": "^1.24.0",
-    "sass-loader": "^8.0.0",
-    "webpack": "^4.41.4",
-    "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.10.1"
-  },
-  "dependencies": {
-    "d3": "^5.14.2",
-    "gh-pages": "^2.2.0",
-    "postcss-import": "^12.0.1",
-    "simple-breakpoints": "^1.1.3",
-    "smooth-scroll": "^16.1.1"
+    "gh-pages": "^2.2.0"
   }
 }
