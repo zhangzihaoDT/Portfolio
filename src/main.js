@@ -132,10 +132,16 @@
   function renderProjects(projects) {
     var container = document.getElementById('project-list');
     if (!container || !projects) return;
+    var detailKeys = ['\u95ee\u9898', '\u65b9\u6cd5', '\u4ea7\u51fa'];
     container.innerHTML = projects.map(function (p) {
       var detailHtml = '';
-      for (var key in p.detail) {
-        detailHtml += '<div class="project-q"><span class="project-label">' + key + '</span><p>' + p.detail[key] + '</p></div>';
+      for (var i = 0; i < detailKeys.length; i++) {
+        var val = p.detail[detailKeys[i]];
+        if (!val && detailKeys[i] === '\u65b9\u6cd5') {
+          val = p.detail['method'] || p.detail['approach'];
+        }
+        if (!val) continue;
+        detailHtml += '<div class="project-q"><span class="project-label">' + detailKeys[i] + '</span><p>' + val + '</p></div>';
       }
       var tagsHtml = p.tags && p.tags.length
         ? '<div class="project-tags">' + p.tags.map(function (t) { return '<span class="project-tag">' + t + '</span>'; }).join('') + '</div>'
