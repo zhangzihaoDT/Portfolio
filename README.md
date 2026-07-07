@@ -1,127 +1,85 @@
-# Portfolio（GitHub Pages）
+# Portfolio
 
-线上地址：https://zhangzihaoDT.github.io/Portfolio/
+**From Design to Data to AI Tools** · 一个 90 后上班族的能力迁移记录
 
-本项目使用 Webpack 构建静态站点，并通过 `gh-pages` 分支发布到 GitHub Pages。
+线上地址：https://zhangzihaodt.github.io/Portfolio/
 
-## 最终呈现在 .github.io 的页面是哪个？
+## 项目定位
 
-- GitHub Pages 实际托管的是仓库的 `gh-pages` 分支内容
-- 线上入口页面是 `gh-pages` 分支根目录下的 `index.html`
-- 该 `index.html` 来自本地构建产物目录 `dist/`（由 `src/index.html` 模板生成）
+这不是一份传统作品集，而是一个叙事型个人首页。围绕「我为什么走到了这里」展开，展示从平面设计 → 数据分析 → 汽车行业 → AI Tools 的能力演化路径。
 
-## 源码与产物对应关系
+## 项目结构
 
-- 页面骨架（固定结构）：`src/index.html`
-- 页面内容（可动态更新）：`src/content.md`
-- JS 入口与交互逻辑：`src/javascript/index.js`
-- 内容解析与渲染逻辑：`src/javascript/content.js`
-- 样式：`src/sass/*.scss`
-- 构建产物（将被发布）：`dist/`
-- 发布分支（GitHub Pages 托管）：`gh-pages`
-
-## 内容编辑（推荐改这里）
-
-页面的可变内容都在 `src/content.md` 中，修改后重新 `npm run start` 或 `npm run build` 即可更新页面。
-
-### Front Matter（全局字段）
-
-文件开头使用 `---` 包裹的键值对，示例字段：
-
-- `name` / `role`：左侧侧栏标题与副标题
-- `avatar`：头像图片路径（相对 `src/images/`）
-- `resume_url`：简历按钮链接
-- `nav`：侧栏导航，格式为 `标题|锚点id`，多个用逗号分隔
-- `github_url` / `pinterest_url`：底部图标链接
-- `wechat_image`：弹窗二维码图片路径
-
-### Section 约定
-
-`src/content.md` 使用固定的 section 标记来映射页面结构：
-
-- `# One`：首页欢迎语与简介
-- `# Two`：数据可视化（卡片列表）
-- `# Three`：UX / UI 设计（卡片列表）
-- `# Four`：文章（卡片列表 + 更多原创内容表格）
-
-### 卡片条目（Item）
-
-在 `# Two / # Three / # Four` 中使用以下约定定义卡片：
-
-- 以 `## Item` 开始一个条目
-- 后续用 `name:` `url:` `image:` 定义标题/链接/图片
-- 再往后写正文段落（支持换行，支持 `[文本](链接)` 形式的内联链接）
-
-### “更多原创内容”表格
-
-在 `# Four` 中：
-
-- 用 `more_title:` 定义表格标题
-- 用列表行定义表格内容，格式：`- 日期 | 标题 | 链接`
+```
+Portfolio/
+├── src/                     # 发布目录（GitHub Pages 源）
+│   ├── index.html           # 页面骨架，内嵌 JSON 数据
+│   ├── styles.css           # 全部样式
+│   ├── main.js              # 数据读取 + 动态渲染 + 导航
+│   ├── data.json            # 结构化内容源文件
+│   ├── .nojekyll            # 禁止 Jekyll 构建
+│   ├── images/              # 静态图片资源
+│   │   ├── fulls/           # 作品/案例封面图
+│   │   └── overlay.png      # 卡片蒙版纹理
+│   ├── fonts/
+│   └── webfonts/
+├── archive/                 # 旧版文件备份
+│   ├── old-index.html
+│   ├── old-main.scss
+│   ├── old-index.js
+│   └── old-content.js
+├── assets/                  # 品牌资产
+├── package.json
+└── README.md
+```
 
 ## 本地开发
 
-### 1) 安装依赖
-
 ```bash
-npm install
+npm run dev      # python3 -m http.server 8080 -d src
+# 或直接
+open src/index.html
 ```
 
-### 2) 启动开发服务器
+## 数据编辑
 
-```bash
-npm run start
-```
+所有卡片、案例、项目内容集中在两个位置：
 
-## 构建
+1. **`src/data.json`** — 完整结构化数据，修改后需同步到 index.html
+2. **`src/index.html`** 中的 `<script id="page-data">` — 内联数据，页面实际读取来源
 
-### 开发环境构建
+`main.js` 从 `page-data` 读取 JSON，渲染到各容器：
 
-```bash
-npm run build
-```
+| 渲染函数 | 目标容器 | 数据来源 |
+|---|---|---|
+| `renderDesignCards` | `#design-cards` | `data.design.cards` |
+| `renderDataCases` | `#data-cases` | `data.data.cases` |
+| `renderAutoChain` / `renderAutoMatrix` | `#auto-chain` / `#auto-matrix` | `data.auto` |
+| `renderAiCards` / `renderAiCapabilities` | `#ai-cards` / `#ai-capabilities` | `data.ai` |
+| `renderProjects` | `#project-list` | `data.projects` |
+| `renderCapability` | `#capability-grid` | `data.capability` |
 
-### 生产环境构建
+每个项目/卡片可设置 `narrativeRole`，可选值：
 
-```bash
-npm run build-production
-```
-
-构建完成后会生成 `dist/`，其中包含：
-
-- `dist/index.html`（由 `src/index.html` 通过 HtmlWebpackPlugin 生成）
-- `dist/bundle.js`（由 `src/javascript/index.js` 打包生成）
-- `dist/bundle.css`（由 scss 构建生成）
-- 静态资源（图片/字体等）
+- `design-foundation` — 设计底座
+- `data-foundation` — 数据能力
+- `auto-industry` — 行业训练场
+- `ai-tooling` — AI 工具化
+- `life-product` — 生活产品化
 
 ## 发布到 GitHub Pages
 
-### 1) 确认 GitHub Pages 配置
-
-在 GitHub 仓库 Settings → Pages 中，将 Source 设为：
-
-- Branch：`gh-pages`
-- Folder：`/(root)`
-
-### 2) 执行发布命令
-
 ```bash
-npm run deploy
+npm run deploy    # gh-pages -d src -b gh-pages
 ```
 
-该命令等价于：
+发布后等待 CDN 刷新（1-10 分钟），访问：
 
-- 先构建得到 `dist/`
-- 使用 `gh-pages -d dist -b gh-pages` 将 `dist/` 推送到远程的 `gh-pages` 分支
+- https://zhangzihaodt.github.io/Portfolio/
 
-### 3) 验证发布结果
+## 技术栈
 
-等待 GitHub Pages 更新后，访问：
-
-- https://zhangzihaoDT.github.io/Portfolio/
-
-## 常见问题
-
-### 为什么 main 分支没有 bundle.css / bundle.js？
-
-因为它们是构建产物，默认输出在 `dist/`，并发布到 `gh-pages` 分支用于线上托管；日常开发主要维护 `src/` 下的源码。
+- 纯 HTML + CSS + 原生 JavaScript
+- 无框架、无构建工具、无外部依赖
+- 数据驱动渲染（JSON → DOM）
+- 响应式布局，桌面端/移动端可读
