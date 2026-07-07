@@ -128,20 +128,6 @@
     if (el && subtitle) el.textContent = subtitle;
   }
 
-  // --- Render reader guide ---
-  function renderReaderGuide(guide) {
-    var container = document.getElementById('reader-grid');
-    if (!container || !guide || !guide.lines) return;
-    container.innerHTML =
-      '<div class="reader-block">' +
-      '<p class="reader-quote">' + guide.quote + '</p>' +
-      '<div class="reader-lines">' +
-      guide.lines.map(function (l) { return '<p class="reader-line">' + l + '</p>'; }).join('') +
-      '</div>' +
-      '<p class="reader-footnote">' + guide.footnote + '</p>' +
-      '</div>';
-  }
-
   // --- Render projects (enhanced with summary + tags) ---
   function renderProjects(projects) {
     var container = document.getElementById('project-list');
@@ -207,7 +193,6 @@
 
   // --- Execute all renders ---
   renderHeroSubtitle(data.hero && data.hero.subtitle);
-  renderReaderGuide(data.readerGuide);
   renderDesignCards(data.design && data.design.cards);
   renderDataCases(data.data && data.data.cases);
   renderAutoChain(data.auto && data.auto.chain);
