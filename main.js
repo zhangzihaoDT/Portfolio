@@ -183,12 +183,15 @@
       '</div>';
   }
 
-  // --- Render "not what" ---
-  function renderNotWhat(notWhat) {
-    var container = document.getElementById('not-what-content');
-    if (!container || !notWhat) return;
-    container.innerHTML = '<h2 class="section-title">' + notWhat.title + '</h2>' +
-      '<p class="not-what-body">' + notWhat.body + '</p>';
+  // --- Render closing ---
+  function renderClosing(closing) {
+    var container = document.getElementById('closing-content');
+    if (!container || !closing) return;
+    container.innerHTML =
+      '<h2 class="section-title">' + closing.title + '</h2>' +
+      '<p class="closing-copy">' + closing.body + '</p>' +
+      '<p class="closing-copy">' + closing.body2 + '</p>' +
+      '<p class="closing-copy-strong">' + closing.motto + '</p>';
   }
 
   // --- Execute all renders ---
@@ -202,7 +205,7 @@
   renderProjects(data.projects);
   renderCapabilityChain(data.capabilityChain);
   renderCapability(data.capability);
-  renderNotWhat(data.notWhat);
+  renderClosing(data.closing);
 
   // --- Nav active highlight ---
   var navLinks = document.querySelectorAll('.nav-links a');

@@ -840,24 +840,6 @@ a.card:hover h4 {
   font-weight: 300;
 }
 
-/* --- Not What --- */
-.section-not-what {
-  background: #FFF9EF;
-  padding-bottom: 40px;
-}
-
-.not-what-body {
-  font-size: 1.08rem;
-  color: #4A5A6E;
-  line-height: 1.9;
-  max-width: 680px;
-  padding: 24px 28px;
-  background: #FFFFFF;
-  border: 1px solid #E5EAF0;
-  border-left: 4px solid #D79A36;
-  border-radius: 8px;
-}
-
 /* --- Project enhancements --- */
 .project-summary {
   font-size: 0.9rem;
