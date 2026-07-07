@@ -63,8 +63,11 @@
     container.innerHTML = '<div class="method-list">' +
       methods.map(function (m) {
         return '<div class="method-item">' +
+          (m.image ? '<div class="method-visual"><img src="' + m.image + '" alt="' + m.name + '"></div>' : '') +
+          '<div class="method-body">' +
           '<span class="method-name">' + m.name + '</span>' +
           '<span class="method-desc">' + m.description + '</span>' +
+          '</div>' +
           '</div>';
       }).join('') +
       '</div>';
