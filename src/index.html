@@ -32,6 +32,7 @@
           <a href="#data">Data</a>
           <a href="#ai">AI</a>
           <a href="#cases">Cases</a>
+          <a href="#blog">Blog</a>
           <a href="#contact">Contact</a>
         </div>
       </div>
@@ -285,8 +286,25 @@
         </section>
 
         <!-- =============================================
-         11 / CONTACT
-         ============================================= -->
+          11 / BLOG
+          ============================================= -->
+        <section class="section section-blog" id="blog">
+          <div class="container">
+            <div id="blog-listing">
+              <div class="chapter-header">
+                <span class="chapter-number">BLOG</span>
+                <span class="chapter-tag">文章</span>
+              </div>
+              <h2 class="section-title">Blog</h2>
+              <p class="section-copy-lg">知识笔记、技术判断与行业思考。</p>
+              <div id="blog-list"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =============================================
+          12 / CONTACT
+          ============================================= -->
         <section class="section section-closing" id="contact">
           <div class="container">
             <div id="closing-content"></div>
@@ -504,6 +522,19 @@
             }
           }
         ],
+        "blog": {
+          "posts": [
+            {
+              "id": "time-series-evolution",
+              "title": "时间序列预测",
+              "lead": "从统计模型到 Foundation Model + LLM。TimesFM 是否会替代 Prophet？LLM 在预测系统中究竟承担什么角色？",
+              "date": "2026-07-24",
+              "reading_time": "8 分钟",
+              "category": "数据科学",
+              "tags": ["时间序列", "Foundation Model", "数据科学"]
+            }
+          ]
+        },
         "closing": {
           "title": "仍在继续",
           "body": "我还在上班，也还在继续搭建自己的能力系统。",
@@ -538,6 +569,7 @@
         ]
       }
     </script>
+
     <script src="./main.js"></script>
   </body>
 </html>

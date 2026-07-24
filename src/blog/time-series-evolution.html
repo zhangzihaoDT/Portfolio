@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>时间序列预测 · zihao raccoon</title>
+<style>
+:root {
+  --zh-blue: #174A7C;
+  --zh-deep-blue: #06213D;
+  --zh-cyan: #7ECDEB;
+  --zh-light-blue: #DDEFF8;
+  --zh-cream: #FFF9EF;
+  --zh-raccoon-gold: #D79A36;
+  --zh-brown: #7A4A24;
+  --zh-text: #1F2D3D;
+  --zh-muted: #6B7C8F;
+  --zh-card: #FFFFFF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Noto Sans SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: var(--zh-cream);
+  color: var(--zh-text);
+  line-height: 1.85;
+  -webkit-font-smoothing: antialiased;
+}
+
+.nav-bar {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px 24px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-bar a {
+  font-size: 14px;
+  color: var(--zh-muted);
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+}
+
+.nav-bar a:hover {
+  color: var(--zh-blue);
+}
+
+.nav-bar .brand-link {
+  font-size: 13px;
+  color: var(--zh-muted);
+  letter-spacing: 1px;
+}
+
+/* article container */
+.article {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 56px 24px 80px;
+}
+
+.article-body p,
+.article-body li {
+  max-width: 680px;
+}
+
+/* title area */
+.title-area {
+  margin-bottom: 48px;
+}
+
+.title-area .breadcrumb {
+  font-size: 13px;
+  color: var(--zh-muted);
+  margin-bottom: 20px;
+}
+
+.title-area .breadcrumb a {
+  color: var(--zh-blue);
+  text-decoration: none;
+}
+
+.title-area .breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.title-area .tag-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.title-area .tag {
+  font-size: 12px;
+  color: var(--zh-blue);
+  background: var(--zh-light-blue);
+  padding: 2px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+.title-area h1 {
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--zh-deep-blue);
+  line-height: 1.25;
+  letter-spacing: -0.3px;
+  margin-bottom: 14px;
+}
+
+.title-area .lead {
+  font-size: 17px;
+  color: var(--zh-muted);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  max-width: 640px;
+}
+
+.title-area .meta {
+  font-size: 13px;
+  color: var(--zh-muted);
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.title-area .meta .author {
+  color: var(--zh-raccoon-gold);
+  font-weight: 500;
+}
+
+.title-area .meta-divider {
+  height: 1px;
+  background: rgba(23,74,124,0.08);
+  margin-top: 24px;
+}
+
+/* headings */
+h2 {
+  margin: 60px 0 16px;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--zh-deep-blue);
+  line-height: 1.35;
+  letter-spacing: -0.2px;
+}
+
+h3 {
+  margin: 36px 0 12px;
+  font-size: 19px;
+  font-weight: 650;
+  color: var(--zh-text);
+  line-height: 1.4;
+}
+
+.section-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--zh-raccoon-gold);
+  background: rgba(215,154,54,0.08);
+  padding: 2px 10px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+/* body text */
+.article-body {
+  font-size: 16px;
+  line-height: 1.85;
+}
+
+.article-body p {
+  margin: 0 0 18px;
+}
+
+.article-body strong {
+  font-weight: 650;
+  color: var(--zh-deep-blue);
+}
+
+.article-body a {
+  color: var(--zh-blue);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+}
+
+/* wide visual elements */
+.visual-wide {
+  margin: 24px 0 28px;
+}
+
+@media (min-width: 820px) {
+  .visual-wide {
+    margin-left: -40px;
+    margin-right: -40px;
+  }
+}
+
+/* timeline */
+.timeline-flow {
+  background: var(--zh-light-blue);
+  border-radius: 14px;
+  padding: 28px 24px;
+}
+
+.timeline-flow .tl-stage {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.timeline-flow .tl-stage:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-flow .tl-era {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--zh-muted);
+  min-width: 64px;
+  letter-spacing: 1px;
+  flex-shrink: 0;
+}
+
+.timeline-flow .tl-models {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.timeline-flow .tl-tag {
+  background: var(--zh-card);
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--zh-blue);
+  border: 1px solid rgba(23,74,124,0.1);
+}
+
+.timeline-flow .tl-tag.current {
+  border-color: var(--zh-raccoon-gold);
+  color: var(--zh-brown);
+  background: rgba(215,154,54,0.04);
+}
+
+.timeline-flow .tl-arrow {
+  color: var(--zh-muted);
+  font-size: 14px;
+}
+
+.timeline-flow .tl-desc {
+  font-size: 13px;
+  color: var(--zh-muted);
+  margin-left: 72px;
+  margin-top: -4px;
+  margin-bottom: 14px;
+}
+
+.timeline-flow .tl-desc:last-of-type {
+  margin-bottom: 0;
+}
+
+/* positioning table */
+.table-wrap {
+  overflow-x: auto;
+  margin: 20px 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-wrap .scroll-hint {
+  font-size: 11px;
+  color: var(--zh-muted);
+  text-align: right;
+  margin-bottom: 6px;
+  opacity: 0.6;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+table th {
+  background: var(--zh-light-blue);
+  color: var(--zh-blue);
+  font-weight: 600;
+  padding: 10px 14px;
+  text-align: left;
+}
+
+table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(23,74,124,0.05);
+}
+
+table tr:last-child td {
+  border-bottom: none;
+}
+
+table tbody tr:hover {
+  background: rgba(222,239,248,0.3);
+}
+
+table .highlight-row {
+  background: rgba(215,154,54,0.04);
+}
+
+table .highlight-row td:first-child {
+  font-weight: 600;
+}
+
+/* comparison table mobile */
+@media (max-width: 600px) {
+  .compare-desktop {
+    display: none;
+  }
+  .compare-mobile {
+    display: block;
+  }
+
+  .compare-card {
+    background: var(--zh-light-blue);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+
+  .compare-card .cc-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--zh-deep-blue);
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(23,74,124,0.08);
+  }
+
+  .compare-card .cc-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(23,74,124,0.04);
+  }
+
+  .compare-card .cc-row:last-child {
+    border-bottom: none;
+  }
+
+  .compare-card .cc-label {
+    color: var(--zh-muted);
+    flex-shrink: 0;
+    margin-right: 8px;
+  }
+}
+
+@media (min-width: 601px) {
+  .compare-desktop {
+    display: block;
+  }
+  .compare-mobile {
+    display: none;
+  }
+}
+
+/* key insight box */
+.insight {
+  background: rgba(126,205,235,0.08);
+  border-left: 3px solid var(--zh-cyan);
+  padding: 16px 20px;
+  border-radius: 0 10px 10px 0;
+  margin: 20px 0;
+  max-width: 680px;
+}
+
+.insight strong {
+  color: var(--zh-blue);
+}
+
+/* numbered list (scenarios) */
+.scenario-list {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0;
+  max-width: 680px;
+}
+
+.scenario-list li {
+  position: relative;
+  padding: 12px 16px 12px 44px;
+  margin-bottom: 10px;
+  background: var(--zh-light-blue);
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.scenario-list li .s-num {
+  position: absolute;
+  left: 14px;
+  top: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--zh-blue);
+}
+
+.scenario-list li .s-title {
+  font-weight: 600;
+  color: var(--zh-deep-blue);
+}
+
+.scenario-list li .s-desc {
+  color: var(--zh-muted);
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+/* formula highlight */
+.formula-box {
+  background: var(--zh-light-blue);
+  border-radius: 10px;
+  padding: 14px 20px;
+  margin: 12px 0 18px;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--zh-blue);
+  letter-spacing: 1px;
+  font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+}
+
+/* architecture flow */
+.arch-diagram {
+  background: var(--zh-card);
+  border: 1px solid rgba(23,74,124,0.08);
+  border-radius: 14px;
+  padding: 28px 24px;
+  margin: 20px 0;
+}
+
+.arch-diagram .arch-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.arch-diagram .arch-row:last-child {
+  margin-bottom: 0;
+}
+
+.arch-diagram .arch-box {
+  background: var(--zh-light-blue);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 13px;
+  line-height: 1.5;
+  border: 1px solid rgba(23,74,124,0.08);
+  flex-shrink: 0;
+}
+
+.arch-diagram .arch-box .ab-label {
+  font-size: 10px;
+  color: var(--zh-muted);
+  font-weight: 400;
+}
+
+.arch-diagram .arch-box.baseline {
+  background: #F0F2F5;
+}
+
+.arch-diagram .arch-box.primary {
+  background: rgba(215,154,54,0.06);
+  border-color: var(--zh-raccoon-gold);
+}
+
+.arch-diagram .arch-box.llm-box {
+  background: rgba(23,74,124,0.06);
+  border-color: var(--zh-blue);
+}
+
+.arch-diagram .arch-box.context {
+  background: #F5F7FA;
+  border-style: dashed;
+}
+
+.arch-diagram .arch-box.result {
+  background: rgba(126,205,235,0.08);
+  border-color: var(--zh-cyan);
+}
+
+.arch-diagram .arch-arrow {
+  color: var(--zh-muted);
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.arch-diagram .arch-label {
+  font-size: 12px;
+  color: var(--zh-muted);
+  margin: 6px 0 0;
+}
+
+.arch-diagram .arch-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.arch-diagram .arch-bracket {
+  width: 100%;
+  text-align: center;
+  font-size: 11px;
+  color: var(--zh-muted);
+  letter-spacing: 2px;
+  padding: 2px 0;
+  position: relative;
+}
+
+/* conclusion */
+.conclusion {
+  background: var(--zh-deep-blue);
+  color: rgba(255,255,255,0.92);
+  border-radius: 14px;
+  padding: 28px 32px;
+  margin: 32px 0;
+  position: relative;
+}
+
+.conclusion::before {
+  content: '"';
+  position: absolute;
+  top: -2px;
+  left: 14px;
+  font-size: 44px;
+  color: rgba(255,255,255,0.06);
+  line-height: 1;
+}
+
+.conclusion p {
+  color: rgba(255,255,255,0.92);
+  font-size: 15px;
+  line-height: 1.8;
+  max-width: 680px;
+  margin: 0;
+}
+
+.conclusion strong {
+  color: var(--zh-cyan);
+}
+
+/* references */
+.ref-list {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0;
+  max-width: 680px;
+}
+
+.ref-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(23,74,124,0.05);
+  font-size: 14px;
+}
+
+.ref-list li:last-child {
+  border-bottom: none;
+}
+
+.ref-list li a {
+  color: var(--zh-blue);
+  text-decoration: none;
+}
+
+.ref-list li a:hover {
+  text-decoration: underline;
+}
+
+.ref-list li .ref-desc {
+  font-size: 12px;
+  color: var(--zh-muted);
+  margin-top: 1px;
+}
+
+/* related projects */
+.project-card {
+  display: block;
+  background: var(--zh-light-blue);
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin: 16px 0;
+  text-decoration: none;
+  color: var(--zh-text);
+  transition: background 0.2s;
+  max-width: 680px;
+}
+
+.project-card:hover {
+  background: rgba(222,239,248,0.7);
+}
+
+.project-card .pc-label {
+  font-size: 11px;
+  color: var(--zh-raccoon-gold);
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.project-card .pc-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--zh-deep-blue);
+  margin: 4px 0 2px;
+}
+
+.project-card .pc-desc {
+  font-size: 13px;
+  color: var(--zh-muted);
+}
+
+.project-card .pc-arrow {
+  font-size: 14px;
+  color: var(--zh-blue);
+  margin-top: 6px;
+  display: inline-block;
+}
+
+/* footer */
+.article-footer {
+  margin-top: 60px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(23,74,124,0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.article-footer .copyright {
+  font-size: 12px;
+  color: var(--zh-muted);
+  letter-spacing: 0.5px;
+}
+
+/* TOC sidebar */
+.toc-sidebar {
+  display: none;
+}
+
+@media (min-width: 1100px) {
+  .article-wrap {
+    position: relative;
+  }
+  .toc-sidebar {
+    display: block;
+    position: fixed;
+    left: calc(50% + 460px);
+    top: 120px;
+    width: 180px;
+  }
+  .toc-sidebar .toc-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--zh-muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .toc-sidebar .toc-list {
+    list-style: none;
+    padding: 0;
+  }
+  .toc-sidebar .toc-list li {
+    margin-bottom: 6px;
+  }
+  .toc-sidebar .toc-list a {
+    font-size: 13px;
+    color: var(--zh-muted);
+    text-decoration: none;
+    line-height: 1.4;
+    display: block;
+    padding: 3px 0;
+    transition: color 0.2s;
+  }
+  .toc-sidebar .toc-list a:hover {
+    color: var(--zh-blue);
+  }
+}
+
+/* pager */
+.pager {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.pager a {
+  font-size: 14px;
+  color: var(--zh-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.pager a:hover {
+  color: var(--zh-blue);
+}
+
+.pager .pager-disabled {
+  color: rgba(107,124,143,0.3);
+}
+
+/* responsive */
+@media (max-width: 600px) {
+  .article {
+    padding: 32px 18px 60px;
+  }
+
+  .title-area h1 {
+    font-size: 28px;
+  }
+
+  .title-area .lead {
+    font-size: 16px;
+  }
+
+  .article-body {
+    font-size: 16px;
+  }
+
+  h2 {
+    font-size: 22px;
+    margin: 48px 0 14px;
+  }
+
+  h3 {
+    font-size: 17px;
+    margin: 28px 0 10px;
+  }
+
+  .timeline-flow {
+    padding: 20px 16px;
+  }
+
+  .timeline-flow .tl-stage {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin-bottom: 14px;
+  }
+
+  .timeline-flow .tl-era {
+    min-width: auto;
+    font-size: 11px;
+  }
+
+  .timeline-flow .tl-desc {
+    margin-left: 0;
+  }
+
+  .arch-diagram {
+    padding: 20px 16px;
+  }
+
+  .arch-diagram .arch-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .arch-diagram .arch-arrow {
+    transform: rotate(90deg);
+  }
+
+  .arch-diagram .arch-bracket {
+    display: none;
+  }
+
+  .conclusion {
+    padding: 20px 18px;
+  }
+
+  .nav-bar {
+    padding: 16px 18px 0;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a href="/#blog">← 返回 Blog</a>
+  <span class="brand-link">zihao raccoon</span>
+</nav>
+
+<div class="article-wrap">
+  <article class="article">
+    <header class="title-area">
+      <div class="breadcrumb">
+        <a href="/">Portfolio</a> / <a href="/#blog">Blog</a>
+      </div>
+      <div class="tag-row">
+        
+      </div>
+      <h1>时间序列预测</h1>
+      <p class="lead">从统计模型到 Foundation Model + LLM。TimesFM 是否会替代 Prophet？LLM 在预测系统中究竟承担什么角色？</p>
+      <div class="meta">
+        <span class="author">zihao raccoon</span>
+        <time datetime="2026-07-24">2026 年 7 月 24 日</time>
+        <span>最后更新：2026 年 7 月 24 日</span>
+        <span>·</span>
+        <span>8 分钟</span>
+      </div>
+      <div class="meta-divider"></div>
+    </header>
+
+    <div class="article-body">
+<div class="section-label">Evolution</div>
+<h2 id="模型范式如何演进">01 模型范式如何演进</h2>
+<p>时间序列预测的发展并不是简单的&quot;谁替代谁&quot;，而是经历了四次范式转移：从人工定义规律，到人工构造特征，再到模型自动学习表示，最终走向跨数据集预训练。</p>
+<div class="visual-wide timeline-flow">
+  <div class="tl-stage">
+    <span class="tl-era">统计建模</span>
+    <span class="tl-models">
+      <span class="tl-tag">ARIMA</span>
+      <span class="tl-arrow">→</span>
+      <span class="tl-tag">Prophet</span>
+    </span>
+  </div>
+  <div class="tl-desc">人工定义规律：趋势、季节性、节假日等显式假设</div>
+  <div class="tl-stage">
+    <span class="tl-era">特征工程</span>
+    <span class="tl-models">
+      <span class="tl-tag">LightGBM</span>
+      <span class="tl-tag">XGBoost</span>
+    </span>
+  </div>
+  <div class="tl-desc">人工构造时滞、统计量等特征，用树模型拟合</div>
+  <div class="tl-stage">
+    <span class="tl-era">表示学习</span>
+    <span class="tl-models">
+      <span class="tl-tag">LSTM</span>
+      <span class="tl-arrow">→</span>
+      <span class="tl-tag">Transformer</span>
+      <span class="tl-arrow">→</span>
+      <span class="tl-tag">TFT</span>
+    </span>
+  </div>
+  <div class="tl-desc">模型自动学习时序模式与长程依赖</div>
+  <div class="tl-stage">
+    <span class="tl-era">预训练</span>
+    <span class="tl-models">
+      <span class="tl-tag current">TimesFM</span>
+      <span class="tl-tag current">Chronos</span>
+      <span class="tl-tag current">TimeGPT</span>
+      <span class="tl-tag current">Moirai</span>
+    </span>
+  </div>
+  <div class="tl-desc" style="margin-bottom:0;">跨数据集预训练，零样本预测</div>
+</div><div class="section-label">Positioning</div>
+<h2 id="各类模型分别解决什么问题">02 各类模型分别解决什么问题</h2>
+<p>每一种模型的兴起都有其背景。理解它们各自擅长的场景，比记住模型名称更重要。</p>
+<div class="table-wrap visual-wide"><div class="scroll-hint">← 左右滑动 →</div><table class="compare-desktop">
+<thead>
+<tr>
+<th>模型</th>
+<th>定位</th>
+<th>核心优势</th>
+<th>局限</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ARIMA</td>
+<td>经典统计基线</td>
+<td>理论基础扎实，可解释</td>
+<td>仅单变量，无法捕捉复杂模式</td>
+</tr>
+<tr>
+<td>Prophet</td>
+<td>商业时间序列</td>
+<td>分解直观，业务友好</td>
+<td>强假设，复杂场景需人工调参</td>
+</tr>
+<tr>
+<td>LightGBM</td>
+<td>表格预测主流</td>
+<td>特征灵活，工业落地成熟</td>
+<td>需人工构造特征，泛化受限</td>
+</tr>
+<tr>
+<td>TFT</td>
+<td>Transformer 代表</td>
+<td>长程依赖，可解释注意力</td>
+<td>训练成本高，数据量要求大</td>
+</tr>
+<tr>
+<td>TimesFM / Chronos</td>
+<td>大模型方向（2026）</td>
+<td>零样本，跨序列迁移</td>
+<td>可解释性弱，黑箱输出</td>
+</tr>
+</tbody></table></div>
+<div class="section-label">Prophet vs TimesFM</div>
+<h2 id="timesfm-会替代-prophet-吗">03 TimesFM 会替代 Prophet 吗</h2>
+<p><strong>Prophet</strong> 的核心假设是一个加法分解模型：</p>
+<div class="formula-box">y(t) = trend(t) + seasonality(t) + holidays(t) + error(t)</div><p>这种假设非常适合电商销量、日订单、DAU、UV 等规律性强的场景。但当遇到疫情、价格战、政策突变、新事件爆发时，Prophet 往往需要大量人工调参才能跟上变化。</p>
+<p><strong>TimesFM</strong> 的思路完全不同。它不预设数据规律，而是在海量时间序列上预训练——股票、销量、天气、交通、金融、能源、IoT——形成一个&quot;时间序列世界模型&quot;。对新序列甚至不用训练即可直接预测，即 <strong>Zero-shot Forecasting</strong>。</p>
+<div class="insight"><strong>综合来看：</strong> 基线模型选 Prophet，提升精度、面对复杂模式或多时间序列选 TimesFM / Chronos。两者不是替代关系，而是 Prophet 做基线，Foundation Model 做主模型。</div><div class="table-wrap visual-wide"><div class="scroll-hint">← 左右滑动 →</div><table class="compare-desktop">
+<thead>
+<tr>
+<th>维度</th>
+<th>Prophet</th>
+<th>TimesFM</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>核心方法</td>
+<td>加法分解（趋势+季节+节假日）</td>
+<td>海量预训练的 Transformer</td>
+</tr>
+<tr>
+<td>数据假设</td>
+<td>强假设，需人工指定规律</td>
+<td>无假设，数据驱动</td>
+</tr>
+<tr>
+<td>训练需求</td>
+<td>需历史数据拟合参数</td>
+<td>零样本预测</td>
+</tr>
+<tr>
+<td>可解释性</td>
+<td>强，可直接分解趋势/季节/节假日</td>
+<td>弱，黑箱输出</td>
+</tr>
+<tr>
+<td>复杂模式</td>
+<td>需人工调参介入</td>
+<td>自动捕捉</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>业务汇报、基线模型</td>
+<td>追求精度、复杂模式</td>
+</tr>
+</tbody></table></div>
+<p>如何选择？</p>
+<ol>
+<li><p><strong>需要业务解释</strong>
+→ Prophet，业务团队需要理解趋势、季节和节假日效应</p>
+</li>
+<li><p><strong>优先追求预测表现</strong>
+→ TimesFM / Chronos，面对复杂模式时精度优势明显</p>
+</li>
+<li><p><strong>工业级预测系统</strong>
+→ 基线模型 + Foundation Model + LLM 三层组合（见下）</p>
+</li>
+</ol>
+<div class="section-label">3-Tier Architecture</div>
+<h2 id="一个更现实的三层预测架构">04 一个更现实的三层预测架构</h2>
+<p>真正工业界并非二选一，而是组合使用。三个层次各司其职：</p>
+<div class="visual-wide arch-diagram">
+  <div class="arch-row">
+    <span class="arch-box" style="min-width:120px;">
+      历史销量<br>业务变量<br>
+      <span class="ab-label">input</span>
+    </span>
+  </div>
+  <div class="arch-row">
+    <span class="arch-arrow">↓</span>
+  </div>
+  <div class="arch-row">
+    <span class="arch-box baseline">
+      Prophet <span class="ab-label">基线 · 可解释基准</span>
+    </span>
+    <span class="arch-box primary">
+      TimesFM / Chronos <span class="ab-label">主模型 · SOTA</span>
+    </span>
+  </div>
+  <div class="arch-bracket">┄┄ 双轨预测 ┄┄</div>
+  <div class="arch-row">
+    <span class="arch-arrow">↓</span>
+  </div>
+  <div class="arch-row">
+    <span class="arch-box result">
+      融合预测结果
+      <span class="ab-label">ensemble</span>
+    </span>
+  </div>
+  <div class="arch-row">
+    <span class="arch-arrow">↓</span>
+  </div>
+  <div class="arch-row" style="gap:6px;">
+    <span class="arch-box context">
+      竞品价格 · 政策 · 天气 · 营销活动
+      <span class="ab-label">context</span>
+    </span>
+    <span class="arch-arrow" style="font-size:14px;">+</span>
+  </div>
+  <div class="arch-row">
+    <span class="arch-arrow">↓</span>
+  </div>
+  <div class="arch-row">
+    <span class="arch-box llm-box">
+      LLM
+      <span class="ab-label">解释 · 归因 · 生成</span>
+    </span>
+  </div>
+  <div class="arch-row">
+    <span class="arch-arrow">↓</span>
+  </div>
+  <div class="arch-row">
+    <span class="arch-box result" style="border-color:var(--zh-blue);">
+      业务报告 · 决策建议
+      <span class="ab-label">actionable insight</span>
+    </span>
+  </div>
+</div><h3 id="示例-汽车销量预测日报">示例：汽车销量预测日报</h3>
+<ul>
+<li><strong>TimesFM</strong> 预测未来 30 天销量</li>
+<li><strong>LLM</strong> 接入竞品价格、国补政策、天气、营销活动等上下文，自动生成日报——</li>
+</ul>
+<div class="formula-box">今天预测下降 8%。
+原因：① 国补政策结束 ② 比亚迪降价 ③ 周末效应消退</div><div class="section-label">LLM Role</div>
+<h2 id="llm-在其中承担什么角色">05 LLM 在其中承担什么角色</h2>
+<div class="insight"><strong>LLM ≠ 时间序列预测模型。</strong> TimesFM、Chronos 等是专门训练的时间序列 Foundation Model，预测能力通常比通用 LLM 更强。</div><p>LLM 擅长的是理解业务背景、解释预测结果、结合新闻政策等非结构化信息、调用工具完成分析。它不负责&quot;预测数字&quot;，而是负责&quot;理解数字背后的意义&quot;。</p>
+<p>当前 AI 应用架构简化为：</p>
+<div class="visual-wide arch-diagram">
+  <div class="arch-row">
+    <span class="arch-box" style="min-width:100px;">
+      结构化时间序列
+      <span class="ab-label">structured data</span>
+    </span>
+    <span class="arch-arrow">→</span>
+    <span class="arch-box primary">
+      TimesFM / Chronos
+      <span class="ab-label">forecast</span>
+    </span>
+    <span class="arch-arrow">→</span>
+    <span class="arch-box llm-box">
+      LLM
+      <span class="ab-label">understanding</span>
+    </span>
+    <span class="arch-arrow">→</span>
+    <span class="arch-box result">
+      解释 · 报告 · 建议
+      <span class="ab-label">decision support</span>
+    </span>
+  </div>
+</div><div class="section-label">Summary</div>
+<h2 id="结论">06 结论</h2>
+<div class="conclusion">时间序列模型的发展经历了"<strong>统计模型（ARIMA、Prophet）→ 深度学习（LSTM）→ Transformer（TFT）→ 时间序列基础模型（TimesFM、Chronos）</strong>"。当前很多 AI 应用采用"<strong>Foundation Model + LLM</strong>"的组合：Foundation Model 负责预测，LLM 负责<strong>理解、解释和决策支持</strong>。</div><p>这句话既体现了技术演进，也体现了当前 AI 应用的整体架构——而不是简单地认为&quot;LLM 完全替代了时间序列模型&quot;。</p>
+<h2 id="参考与延伸阅读">参考与延伸阅读</h2>
+<ol>
+<li><p><a href="https://github.com/google-research/timesfm" target="_blank" rel="noopener noreferrer">TimesFM · Google Research</a>
+Time Series Foundation Model，海量时间序列预训练。</p>
+</li>
+<li><p><a href="https://github.com/amazon-science/chronos-forecasting" target="_blank" rel="noopener noreferrer">Chronos · Amazon Science</a>
+基于语言模型范式的时间序列预测框架。</p>
+</li>
+<li><p><a href="https://github.com/facebook/prophet" target="_blank" rel="noopener noreferrer">Prophet · Meta</a>
+可分解时间序列预测工具，适合商业场景。</p>
+</li>
+<li><p><a href="https://arxiv.org/abs/1912.09363" target="_blank" rel="noopener noreferrer">Temporal Fusion Transformer</a>
+Transformer 在时间序列预测中的代表工作。</p>
+</li>
+</ol>
+
+    </div>
+
+    <footer class="article-footer">
+      <span class="copyright">© 2026 zihao raccoon</span>
+      <span class="copyright" style="font-size:11px;">Opinions are my own.</span>
+    </footer>
+  </article>
+
+  <nav class="toc-sidebar">
+    <div class="toc-title">本文目录</div>
+    <ul class="toc-list">
+      <li><a href="#模型范式如何演进">01 模型范式如何演进</a></li>
+      <li><a href="#各类模型分别解决什么问题">02 各类模型分别解决什么问题</a></li>
+      <li><a href="#timesfm-会替代-prophet-吗">03 TimesFM 会替代 Prophet 吗</a></li>
+      <li><a href="#一个更现实的三层预测架构">04 一个更现实的三层预测架构</a></li>
+      <li><a href="#llm-在其中承担什么角色">05 LLM 在其中承担什么角色</a></li>
+      <li><a href="#结论">06 结论</a></li>
+    </ul>
+  </nav>
+</div>
+
+</body>
+</html>

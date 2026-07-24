@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "python3 -m http.server 8080 -d src",
-    "deploy": "npm run gh-pages",
+    "build:blog": "node blog/build-blog.js",
+    "deploy": "npm run build:blog && npm run gh-pages",
     "gh-pages": "gh-pages -d src -b gh-pages"
   },
   "keywords": [],
@@ -13,6 +14,7 @@
   "homepage": "https://zhangzihaodt.github.io/Portfolio",
   "license": "ISC",
   "devDependencies": {
-    "gh-pages": "^2.2.0"
+    "gh-pages": "^2.2.0",
+    "marked": "^18.0.7"
   }
 }

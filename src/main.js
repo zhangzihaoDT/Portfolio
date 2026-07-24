@@ -260,4 +260,35 @@
     }
   });
   updateActive();
+
+  // --- Blog rendering & interaction ---
+
+  function renderBlogListing(posts) {
+    var container = document.getElementById('blog-list');
+    if (!container || !posts || !posts.length) return;
+    container.innerHTML = posts.map(function (p) {
+      var href = 'blog/' + p.id + '.html';
+      return '<a class="blog-post-card" href="' + href + '">' +
+        '<div class="bpc-tags">' +
+        (p.tags || []).map(function (t) { return '<span class="bpc-tag">' + t + '</span>'; }).join('') +
+        '</div>' +
+        '<div class="bpc-title">' + p.title + '</div>' +
+        (p.lead ? '<div class="bpc-lead">' + p.lead + '</div>' : '') +
+        '<div class="bpc-meta">' +
+        '<span class="bpc-author">zihao raccoon</span>' +
+        '<span>' + p.date + '</span>' +
+        '<span>\u00b7</span>' +
+        '<span>' + p.reading_time + '</span>' +
+        '</div>' +
+        '</a>';
+    }).join('');
+  }
+
+
+
+  var blogData = data.blog;
+  if (blogData && blogData.posts) {
+    renderBlogListing(blogData.posts);
+  }
+
 })();

@@ -1213,3 +1213,83 @@ a.card:hover h4 {
     font-size: 0.78rem;
   }
 }
+
+/* ============================================
+   Blog Section
+   ============================================ */
+.section-blog {
+  background: transparent;
+}
+
+.section-blog .section-copy-lg {
+  margin-bottom: 32px;
+}
+
+/* Blog listing cards */
+.blog-post-card {
+  display: block;
+  background: #FFFFFF;
+  border: 1px solid #E5EAF0;
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin-bottom: 16px;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+
+.blog-post-card:hover {
+  box-shadow: 0 4px 16px rgba(23,74,124,0.08);
+  transform: translateY(-2px);
+}
+
+.blog-post-card .bpc-tags {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.blog-post-card .bpc-tag {
+  font-size: 11px;
+  color: #174A7C;
+  background: #DDEFF8;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+.blog-post-card .bpc-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #06213D;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.blog-post-card:hover .bpc-title {
+  color: #174A7C;
+}
+
+.blog-post-card .bpc-lead {
+  font-size: 0.88rem;
+  color: #6B7C8F;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.blog-post-card .bpc-meta {
+  font-size: 0.78rem;
+  color: #8FA4B8;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.blog-post-card .bpc-meta .bpc-author {
+  color: #D79A36;
+  font-weight: 500;
+}
+
