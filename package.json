@@ -7,7 +7,7 @@
     "dev": "python3 -m http.server 8080 -d src",
     "build:blog": "node blog/build-blog.js",
     "deploy": "npm run build:blog && npm run gh-pages",
-    "gh-pages": "gh-pages -d src -b gh-pages"
+    "gh-pages": "gh-pages -d src -b gh-pages -t"
   },
   "keywords": [],
   "author": "Zihao Zhang",

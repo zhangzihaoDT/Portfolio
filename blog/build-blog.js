@@ -173,14 +173,14 @@ function template(meta, bodyHtml, tocHtml) {
     '<style>\n' + getInlineStyles() + '\n</style>\n</head>\n' +
     '<body>\n\n' +
     '<nav class="nav-bar">\n' +
-    '  <a href="/#blog">← 返回 Blog</a>\n' +
+    '  <a href="../#blog">← 返回 Blog</a>\n' +
     '  <span class="brand-link">zihao raccoon</span>\n' +
     '</nav>\n\n' +
     '<div class="article-wrap">\n' +
     '  <article class="article">\n' +
     '    <header class="title-area">\n' +
     '      <div class="breadcrumb">\n' +
-    '        <a href="/">Portfolio</a> / <a href="/#blog">Blog</a>\n' +
+    '        <a href="../">Portfolio</a> / <a href="../#blog">Blog</a>\n' +
     '      </div>\n' +
     '      <div class="tag-row">\n        ' + tagHtml + '\n      </div>\n' +
     '      <h1>' + title + '</h1>\n' +
